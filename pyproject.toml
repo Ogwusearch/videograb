@@ -1,0 +1,43 @@
+[build-system]
+requires      = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name        = "videograb"
+version     = "1.0.0"
+description = "Universal video downloader — YouTube, X/Twitter, Instagram, Snapchat & more"
+readme      = "README.md"
+license     = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "yt-dlp>=2024.1.0",
+    "rich>=13.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov",
+    "flake8",
+    "black",
+    "mypy",
+]
+
+[project.scripts]
+videograb = "videograb.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts   = "-v"
+
+[tool.black]
+line-length    = 110
+target-version = ["py310", "py311", "py312"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["videograb*"]
